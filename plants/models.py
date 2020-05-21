@@ -89,8 +89,58 @@ class Plant(UserMixin, models.Model):
 
 
 class Room(UserMixin, models.Model):
-	pass
+	name = models.CharField(max_length=128)
+
+	EXPOSURE_CHOICES = [
+		('dark', 'Dark'),
+		('shade', 'Shade'),
+		('partsun', 'Part sunny'),
+		('fullsun', 'Full sunny'),
+	]
+	exposure = models.CharField(
+		max_length=10,
+		choices=EXPOSURE_CHOICES,
+		help_text="Amount of sun"
+	)
+	HUMIDITY_CHOICES = [
+		('low', 'Low'),
+		('medium', 'Medium'),
+		('high', 'High'),
+	]
+	humidity = models.CharField(
+		max_length=10,
+		choices=None,
+		help_text="Optimal humidity"
+	)
+
+	TEMPERATURES_CHOICES = [
+		('cold', 'Cold'),
+		('medium', 'Medium'),
+		('warm', 'Warm'),
+	]
+	temperature = models.CharField(
+		max_length=10,
+		choices=None,
+		help_text="Optimal temperature"
+	)
+	drafty = models.BooleanField(
+		default=False, null=False, blank=True,
+	)
 
 
 class UserPlant(UserMixin, models.Model):
-	pass
+	name = models.CharField(max_length=128)
+	description = models.CharField(
+		max_length=256,
+		null=False, default='', blank=True,
+	)
+	room = models.ForeignKey(
+		Room, on_delete=models.PROTECT,
+	)
+	plant = models.ForeignKey(
+		Plant, on_delete=models.PROTECT,
+	)
+	fertilizing_time = models.DateTimeField()
+	watering_time = models.DateTimeField()
+
+
