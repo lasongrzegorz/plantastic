@@ -126,7 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_STORAGE = whitnoise
+# STATICFILES_STORAGE = whitenoise
 
 # REST Framework
 REST_FRAMEWORK = {
