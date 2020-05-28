@@ -31,8 +31,10 @@ class NameDescriptionMixin(models.Model):
 
 
 class Category(UserMixin, NameDescriptionMixin, ImageMixin, models.Model):
-    slug = models.SlugField()
-    verbose_name_plural = 'Categories'
+    slug = models.SlugField(unique=True)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
 
 
 class Plant(UserMixin, NameDescriptionMixin, models.Model):
