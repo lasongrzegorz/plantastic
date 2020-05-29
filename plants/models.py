@@ -13,7 +13,9 @@ class UserMixin(models.Model):
 
 
 class ImageMixin(models.Model):
-    image_url = models.URLField()
+    image_url = models.URLField(
+        blank=True, default='',
+    )
 
     class Meta:
         abstract = True
